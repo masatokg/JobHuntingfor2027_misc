@@ -6,8 +6,8 @@
     <title>IT就活ポートフォリオ・アイデアファインダー</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chosen Palette: Calm Harmony (Light neutrals with muted teal/blue accents) -->
-    <!-- Application Structure Plan: The application is designed as an "Idea Finder" dashboard. It transforms the static list from the report into an interactive experience. The main view presents ten app ideas as cards in a responsive grid. Users can filter these ideas by the primary skill they wish to showcase (e.g., UI/UX, Data Structures, Game Development), which highlights relevant cards. Clicking any card expands it accordion-style to reveal detailed information without leaving the page. This structure was chosen to facilitate easy comparison and guide the user's decision-making process, making the content more engaging and useful than a simple text document. -->
-    <!-- Visualization & Content Choices: Report Info: 10 app ideas with descriptions and appeal points. -> Goal: Inform, Compare, Guide. -> Viz/Presentation Method: Interactive cards in a responsive grid. Details are shown/hidden with an accordion mechanism. Key skills are presented as tags. -> Interaction: Users filter cards by clicking skill-based buttons, which visually emphasizes matching ideas. Users click cards to expand/collapse details. -> Justification: This approach turns a passive list into a dynamic tool. Filtering helps users match ideas to their personal learning goals. The accordion keeps the UI clean and focused. -> Library/Method: HTML/Tailwind CSS for structure and style. Vanilla JS for all interactions (filtering, accordion). -->
+    <!-- Application Structure Plan: The application is designed as an "Idea Finder" dashboard. It transforms the static list from the report into an interactive experience. The main view presents thirty app ideas as cards in a responsive grid. Users can filter these ideas by various categories including primary skill sets (e.g., UI/UX, Data Structures, Game Development) and target user demographics (For Kids, For Seniors), which highlights relevant cards. Clicking any card expands it accordion-style to reveal detailed information without leaving the page. This structure was chosen to facilitate easy comparison and guide the user's decision-making process by allowing them to quickly narrow down ideas based on their interests and target audience, making the content more engaging and useful than a simple text document. -->
+    <!-- Visualization & Content Choices: Report Info: 30 app ideas with descriptions and appeal points, categorized by skills and user segments. -> Goal: Inform, Compare, Guide, Explore. -> Viz/Presentation Method: Interactive cards in a responsive grid. Details are shown/hidden with an accordion mechanism. Key skills and target users are presented as tags. -> Interaction: Users filter cards by clicking various category-based buttons, which visually emphasizes matching ideas. Users click cards to expand/collapse details. -> Justification: This approach turns a passive, extensive list into a dynamic, user-centric tool. Expanding the filter categories to include target demographics directly addresses the user's request for more user-centric ideas, allowing job seekers to align projects with specific audience needs. The accordion keeps the UI clean and focused even with a large number of ideas. -> Library/Method: HTML/Tailwind CSS for structure and style. Vanilla JS for all interactions (filtering, accordion). -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
@@ -24,7 +24,7 @@
             transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
         }
         .card.open .card-content {
-            max-height: 1000px;
+            max-height: 1000px; /* 十分な高さを確保 */
             transition: max-height 1s ease-in-out;
         }
         .card-container {
@@ -42,7 +42,7 @@
         <header class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-bold text-teal-700 mb-2">IT就活ポートフォリオ・アイデアファインダー</h1>
             <p class="text-slate-600 max-w-2xl mx-auto">
-                就職活動であなたのスキルを効果的にアピールするためのWebアプリ開発アイデア集です。下のフィルターで興味のある分野を絞り込んだり、各カードをクリックして詳細を確認しましょう。
+                就職活動であなたのスキルを効果的にアピールするためのWebアプリ開発アイデア集です。下のフィルターで興味のある分野やターゲットユーザーを絞り込んだり、各カードをクリックして詳細を確認しましょう。
             </p>
         </header>
 
@@ -56,6 +56,10 @@
                 <button data-filter="api" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">外部API</button>
                 <button data-filter="game" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">ゲーム開発</button>
                 <button data-filter="entertainment" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">エンタメ</button>
+                <button data-filter="kids" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">子供向け</button>
+                <button data-filter="seniors" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">老人向け</button>
+                <button data-filter="education" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">学習</button>
+                <button data-filter="health-wellness" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">健康・生活</button>
             </div>
         </section>
 
@@ -75,7 +79,7 @@
                     id: 1,
                     title: 'タスク管理アプリ',
                     summary: 'Web開発の基本であるCRUD操作を総合的に学べ、ユーザー体験を意識した機能追加でアピール度を高められます。',
-                    tags: ['crud', 'ui-ux'],
+                    tags: ['crud', 'ui-ux', 'health-wellness'],
                     content: {
                         description: 'ユーザーが自身のタスクを追加、編集、削除、完了できる基本的なタスク管理ツールです。タスクには期限や優先度を設定できるようにすると良いでしょう。',
                         reasons: [
@@ -93,7 +97,7 @@
                     id: 2,
                     title: 'シンプルなブログ/メモ投稿アプリ',
                     summary: 'コンテンツ管理の基本と、ログイン機能による認証・認可の仕組みを学ぶのに最適なプロジェクトです。',
-                    tags: ['crud', 'auth'],
+                    tags: ['crud', 'auth', 'life-style'],
                     content: {
                         description: 'ユーザーが記事やメモを投稿し、閲覧できるアプリです。記事にはタイトルと本文があり、投稿日時の表示や、編集・削除機能があると良いでしょう。',
                         reasons: [
@@ -110,7 +114,7 @@
                     id: 3,
                     title: 'レシピ共有/管理アプリ',
                     summary: '複数のデータ型を組み合わせた複雑なデータ構造の設計や、検索機能の実装スキルをアピールできます。',
-                    tags: ['crud', 'data-structure'],
+                    tags: ['crud', 'data-structure', 'health-wellness'],
                     content: {
                         description: 'ユーザーが自分のレシピを投稿し、他のユーザーがそれを検索・閲覧できるアプリです。レシピには材料、手順、写真（プレースホルダーでも可）などを登録できるようにします。',
                         reasons: [
@@ -127,7 +131,7 @@
                     id: 4,
                     title: '読書記録アプリ',
                     summary: 'パーソナルなデータ管理を実装する良い練習になります。外部APIと連携すれば、さらに実践的なスキルを示せます。',
-                    tags: ['crud', 'ui-ux', 'api'],
+                    tags: ['crud', 'ui-ux', 'api', 'education'],
                     content: {
                         description: 'ユーザーが読んだ本や読みたい本の情報を記録し、管理できるアプリです。本のタイトル、著者、感想、読了日などを登録し、リストで表示します。本のカバー画像を表示できるとさらに良いでしょう。',
                         reasons: [
@@ -145,7 +149,7 @@
                     id: 5,
                     title: 'カレンダー連動型イベントメモアプリ',
                     summary: '日付や時間に関連するデータの扱いや、ユーザー操作に反応するインタラクティブなUIの実装経験を積めます。',
-                    tags: ['crud', 'ui-ux'],
+                    tags: ['crud', 'ui-ux', 'life-style'],
                     content: {
                         description: 'シンプルなカレンダー表示があり、特定の日付にイベントや予定のメモを登録できるアプリです。登録したメモはその日付の下に表示されます。',
                         reasons: [
@@ -162,7 +166,7 @@
                     id: 6,
                     title: 'シンプルゲーム（パズル/ブロック崩し）',
                     summary: 'ゲーム開発の基本、キャンバス操作、JavaScriptでの物理演算（簡易版）を学び、ユーザーを楽しませる能力を示せます。',
-                    tags: ['game', 'ui-ux'],
+                    tags: ['game', 'ui-ux', 'entertainment'],
                     content: {
                         description: 'ミニゲーム（例: 数独、ブロック崩し、シンプルなシューティングゲームなど）を実装します。Canvas要素を使ってグラフィックを描画し、キーボードやマウスで操作できるようにします。',
                         reasons: [
@@ -181,7 +185,7 @@
                     id: 7,
                     title: 'ランダムレシピ/献立ジェネレーター',
                     summary: 'データのフィルタリングとランダム表示、ユーザーの好みに合わせたパーソナライズ機能を実装できます。',
-                    tags: ['data-structure', 'ui-ux', 'entertainment'],
+                    tags: ['data-structure', 'ui-ux', 'entertainment', 'health-wellness'],
                     content: {
                         description: 'いくつかの料理ジャンル（和食、洋食など）や食材を登録し、ユーザーが選んだ条件に基づいてランダムにレシピを提案するアプリです。お気に入り登録機能も検討できます。',
                         reasons: [
@@ -198,7 +202,7 @@
                     id: 8,
                     title: 'インタラクティブクイズアプリ',
                     summary: 'ユーザーとのインタラクション、状態管理、結果表示のロジックを学ぶのに最適で、幅広いジャンルで応用できます。',
-                    tags: ['ui-ux', 'data-structure', 'entertainment'],
+                    tags: ['ui-ux', 'data-structure', 'entertainment', 'education'],
                     content: {
                         description: '複数の選択肢から正解を選ぶ形式のクイズアプリです。正解・不正解の表示、点数計算、最後に結果サマリーを表示します。クイズのジャンルは自由に設定できます。',
                         reasons: [
@@ -248,6 +252,385 @@
                             '<strong>リアルタイムUIの基礎:</strong> 非同期通信や動的なコンテンツ更新に関する理解を示せます。',
                             '<strong>テキスト処理:</strong> ユーザー入力の取得・表示、簡単な整形処理の能力をアピールできます。',
                             '<strong>UI/UXの工夫:</strong> チャットの会話の流れが分かりやすいような表示や操作性を工夫できます。'
+                        ]
+                    }
+                },
+                {
+                    id: 11,
+                    title: '子供向けお絵かきアプリ',
+                    summary: 'Canvasの基本操作を学び、子供たちが楽しく使えるシンプルな描画ツールを開発できます。',
+                    tags: ['kids', 'ui-ux', 'entertainment'],
+                    content: {
+                        description: 'Canvas要素を使った、指やマウスで自由に線を描けるシンプルなお絵かきアプリです。色の選択、線の太さ調整、全消去などの機能を含めます。',
+                        reasons: [
+                            'HTML Canvasを使った基本的な描画操作を学べます。',
+                            '子供向けの直感的でシンプルなUI/UX設計に挑戦できます。',
+                            'イベントリスナーによるインタラクティブな描画を実践できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>Canvas描画スキル:</strong> Webブラウザ上でのグラフィック描画能力を示せます。',
+                            '<strong>ターゲットユーザー理解:</strong> 子供の使いやすさを考慮したUI設計能力をアピールできます。',
+                            '<strong>インタラクティブな表現:</strong> ユーザーの操作に即座に反応する動的なアプリ作成能力を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 12,
+                    title: 'ひらがな/カタカナ学習アプリ',
+                    summary: 'インタラクティブな要素を取り入れ、基礎的なWeb開発スキルで効果的な学習ツールを作成できます。',
+                    tags: ['kids', 'education', 'ui-ux'],
+                    content: {
+                        description: 'ひらがなやカタカナをフラッシュカード形式で表示し、正しい読み方を選択させるクイズ形式の学習アプリです。音声再生機能（Web Audio APIの簡易利用）を検討しても良いでしょう。',
+                        reasons: [
+                            'データ（文字、読み）の管理と表示ロジックを学べます。',
+                            '学習効果を高めるためのUI/UX設計に挑戦できます。',
+                            'ユーザーの進捗を記録する簡易的な機能（ローカルストレージなど）も考えられます。'
+                        ],
+                        appealPoints: [
+                            '<strong>教育系アプリ開発:</strong> 学習を支援するWebサービスの開発能力を示せます。',
+                            '<strong>UI/UX設計:</strong> 子供が飽きずに学べるような魅力的で分かりやすいインターフェース作成能力をアピールできます。',
+                            '<strong>データ管理とロジック:</strong> 大量の文字データを効率的に表示・管理するスキルを示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 13,
+                    title: '今日の出来事メモアプリ (老人向け)',
+                    summary: 'シンプルで大きな文字、直感的な操作を重視し、高齢者のデジタルデバイド解消に貢献するアプリです。',
+                    tags: ['seniors', 'ui-ux', 'health-wellness'],
+                    content: {
+                        description: '高齢者向けの、その日の出来事を簡単にメモできるアプリです。入力フィールドを大きく、ボタンを分かりやすく配置し、読みやすいフォントとコントラストの高い配色を心がけます。',
+                        reasons: [
+                            '高齢者特有のUI/UXニーズ（文字の大きさ、ボタンの配置、操作性）を考慮した開発を学べます。',
+                            '基本的なテキストデータの保存と表示を実践できます。',
+                            'アクセシビリティへの配慮の重要性を理解できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>アクセシビリティ重視の開発:</strong> 特定のユーザー層（高齢者）のニーズに合わせたUI/UX設計能力を示せます。',
+                            '<strong>シンプルな機能実装:</strong> 必要最小限の機能で最大の価値を提供する設計思想をアピールできます。',
+                            '<strong>ユーザー中心設計:</strong> 利用者の特性を深く理解し、それに基づいて開発を進める姿勢を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 14,
+                    title: '服薬リマインダー (シンプル版)',
+                    summary: 'タイマーや通知機能の基本を学び、健康管理に役立つ実用的なアプリを開発できます。',
+                    tags: ['seniors', 'health-wellness', 'logic'],
+                    content: {
+                        description: '服用する薬の名前と時間を登録し、時間が来たら視覚的または音声で通知する簡易的なアプリです。プッシュ通知（ブラウザのAPI、簡易版）やアラーム音を検討します。',
+                        reasons: [
+                            'JavaScriptのDateオブジェクトやタイマー（setTimeout, setInterval）の利用を学べます。',
+                            'ユーザーにとって重要な通知機能をWeb上で実装する基礎を体験できます。',
+                            '健康管理という具体的な課題解決に向けた開発を実践できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>時間管理ロジック:</strong> 日付・時間に基づいた処理の実装能力を示せます。',
+                            '<strong>通知機能の実装:</strong> ユーザーへのタイムリーな情報提供の仕組みを理解していることをアピールできます。',
+                            '<strong>実用性・社会貢献性:</strong> ユーザーの生活に直接役立つアプリケーション開発への意欲を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 15,
+                    title: 'シンプル日記アプリ (老人向けUI)',
+                    summary: '高齢者でも使いやすい、読み書きがしやすいデザインを重視した日記アプリです。',
+                    tags: ['seniors', 'crud', 'ui-ux'],
+                    content: {
+                        description: '大きな文字とシンプルなレイアウトで、日々の出来事を記録できる日記アプリです。日付ごとの表示、新しい日記の追加、既存日記の編集・削除機能を提供します。',
+                        reasons: [
+                            '高齢者の視覚特性（視力低下など）を考慮したデザインを学べます。',
+                            '基本的なテキストデータのCRUD操作を再度確認・応用できます。',
+                            'ユーザーの習慣に寄り添うアプリ設計を体験できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>ユーザー層に合わせたUI:</strong> 特定のユーザー層のニーズを深く理解し、UI/UXに反映させる能力を示せます。',
+                            '<strong>一貫したデザイン:</strong> アプリ全体で視覚的な一貫性を保ち、使いやすさを追求するスキルをアピールできます。',
+                            '<strong>継続利用への配慮:</strong> 日常的に利用されるアプリとしての機能性とUXを考慮できることを示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 16,
+                    title: '動物の鳴き声クイズ (子供向け)',
+                    summary: '音声と画像を組み合わせ、子供たちが楽しく学べるマルチメディアアプリです。',
+                    tags: ['kids', 'entertainment', 'education'],
+                    content: {
+                        description: '様々な動物の画像を表示し、その動物の鳴き声（音声ファイルとして組み込むか、簡易なテキストベースの模倣音）を再生します。子供が選択肢の中から正しい動物の名前を選ぶクイズです。',
+                        reasons: [
+                            '音声（Web Audio APIの基本）と画像（プレースホルダー）の連携を学べます。',
+                            'クイズ形式のインタラクティブな学習コンテンツを作成できます。',
+                            '子供の興味を引くようなコンテンツの選定と提示方法を学べます。'
+                        ],
+                        appealPoints: [
+                            '<strong>マルチメディアコンテンツの統合:</strong> 音声や画像をWebアプリに組み込む能力を示せます。',
+                            '<strong>ゲームを通じた学習:</strong> ゲーミフィケーションの要素を取り入れた教育アプリ開発への関心を示せます。',
+                            '<strong>クリエイティブな表現:</strong> ユーザーを楽しませるためのアイデアを形にする能力をアピールできます。'
+                        ]
+                }},
+                {
+                    id: 17,
+                    title: 'お片付け支援アプリ (子供向け)',
+                    summary: 'リスト管理とインセンティブ設計を学び、子供の行動変容を促すアプリです。',
+                    tags: ['kids', 'ui-ux', 'life-style'],
+                    content: {
+                        description: '子供が自分で「お片付け」などのタスクを登録し、完了したらご褒美ポイントが付与されるようなシンプルなアプリです。ポイントが貯まると、仮想のご褒美（例：デジタルバッジ）がもらえる仕組みを検討します。',
+                        reasons: [
+                            'タスクリストの管理と状態変化（完了）のロジックを学べます。',
+                            'ポイント付与や報酬表示といったゲーミフィケーション要素の基礎を実践できます。',
+                            '子供向けの分かりやすいUI設計を学べます。'
+                        ],
+                        appealPoints: [
+                            '<strong>行動デザインへの関心:</strong> アプリを通じてユーザーの行動を良い方向に導く設計能力を示せます。',
+                            '<strong>インセンティブ設計:</strong> ゲーミフィケーションの概念を理解し、実装できることをアピールできます。',
+                            '<strong>実用性と楽しさの両立:</strong> 日常の課題を解決しつつ、ユーザーを楽しませるアプリ開発能力を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 18,
+                    title: '脳トレゲーム (高齢者向け)',
+                    summary: '記憶力や計算力を鍛えるシンプルなゲームで、ロジック設計と高齢者向けUIを追求できます。',
+                    tags: ['seniors', 'game', 'health-wellness'],
+                    content: {
+                        description: '簡単な計算問題や、表示された数字を記憶する記憶力ゲームなど、高齢者向けのシンプルな脳トレゲームを複数実装します。操作を最小限にし、大きな文字と明確な指示を心がけます。',
+                        reasons: [
+                            '多様なゲームロジック（計算、記憶）の実装を学べます。',
+                            '高齢者の認知特性を考慮したゲーム設計とUI/UXに挑戦できます。',
+                            '繰り返しプレイしたくなるような要素（スコア記録など）を検討できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>ロジック設計力:</strong> 複雑でないが明確なゲームロジックを設計し、実装できる能力を示せます。',
+                            '<strong>ターゲットユーザーに合わせた開発:</strong> 高齢者のニーズに特化したアプリケーション開発への理解と実践能力をアピールできます。',
+                            '<strong>機能の多角化:</strong> 複数のミニゲームを統合する構成力を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 19,
+                    title: 'シンプル家計簿アプリ',
+                    summary: '入出金データの管理、集計、簡単な可視化を通して、データ管理と実用的なアプリ開発を学びます。',
+                    tags: ['crud', 'data-structure', 'life-style'],
+                    content: {
+                        description: '収入と支出を日付、カテゴリ、金額で記録できるシンプルな家計簿アプリです。月ごとの集計表示や、簡単な円グラフでのカテゴリ別内訳表示（Chart.jsなどのCanvasグラフ）を検討します。',
+                        reasons: [
+                            '時系列データのCRUD操作と集計ロジックを学べます。',
+                            'Canvas要素を用いた基本的なデータ可視化（棒グラフ、円グラフ）を実践できます。',
+                            '日常生活で役立つ実用的なアプリの開発経験を積めます。'
+                        ],
+                        appealPoints: [
+                            '<strong>データ管理・集計:</strong> 複雑な財務データを効率的に管理・分析する能力を示せます。',
+                            '<strong>データ可視化:</strong> グラフを用いてデータを分かりやすく提示するスキルをアピールできます。',
+                            '<strong>実用性重視の開発:</strong> ユーザーの生活課題を解決するアプリケーション開発への関心を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 20,
+                    title: '習慣トラッカー',
+                    summary: 'ユーザーの習慣形成を支援するアプリで、継続的なデータ記録と目標達成の視覚化を学びます。',
+                    tags: ['crud', 'ui-ux', 'health-wellness'],
+                    content: {
+                        description: 'ユーザーが達成したい習慣（例：毎日運動する、読書する）を登録し、毎日達成できたかを記録できるアプリです。連続達成日数や達成率を視覚的に表示します。',
+                        reasons: [
+                            '日々のデータ入力と履歴管理のロジックを学べます。',
+                            '進捗状況を視覚的に分かりやすく表示するUI/UX設計に挑戦できます。',
+                            'ユーザーのモチベーション維持に貢献するアプリ設計を実践できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>継続的なデータ管理:</strong> 長期間にわたるユーザーの行動データを管理する能力を示せます。',
+                            '<strong>進捗可視化:</strong> ユーザーの努力や成果を視覚的にフィードバックするデザインスキルをアピールできます。',
+                            '<strong>ユーザーの行動変容支援:</strong> アプリがユーザーの行動に良い影響を与える設計を理解していることを示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 21,
+                    title: 'シンプルオンラインストップウォッチ/タイマー',
+                    summary: 'JavaScriptのDateオブジェクトと時間処理の基本を学び、実用的なユーティリティアプリを開発できます。',
+                    tags: ['logic', 'ui-ux', 'life-style'],
+                    content: {
+                        description: 'スタート、ストップ、リセット機能を持つストップウォッチと、時間を設定してカウントダウンするタイマー機能を実装します。ラップタイム記録や、タイマー終了時のアラーム音などをオプションで追加します。',
+                        reasons: [
+                            'JavaScriptの時間操作（setInterval, clearInterval, Dateオブジェクト）の基礎を徹底的に学べます。',
+                            '状態遷移（停止中、実行中など）を伴うUIの設計を実践できます。',
+                            'Web Audio APIの簡易利用（アラーム音）の機会があります。'
+                        ],
+                        appealPoints: [
+                            '<strong>JavaScriptのコアスキル:</strong> 時間処理とイベントハンドリングにおける高い理解度を示せます。',
+                            '<strong>ユーティリティ開発:</strong> シンプルながらも高い実用性を持つツール開発能力をアピールできます。',
+                            '<strong>UIの即時応答性:</strong> ユーザーの操作に瞬時に反応し、正確な情報を提供するUI設計へのこだわりを示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 22,
+                    title: 'ミニ掲示板 (シングルユーザー/固定表示)',
+                    summary: 'メッセージの投稿・閲覧を通じて、基本的なデータフローと表示ロジックを学びます。',
+                    tags: ['crud', 'data-structure'],
+                    content: {
+                        description: 'ユーザーが自由に短いメッセージを投稿し、それが一覧で表示される簡易的な掲示板アプリです。ユーザー名とメッセージ内容、投稿日時を表示します。認証機能は含めず、投稿はローカルストレージに保存する程度で構いません。',
+                        reasons: [
+                            'テキストデータのCRUD操作（特にCとR）の応用を学べます。',
+                            '複数データをリスト形式で表示するUIの設計を実践できます。',
+                            '簡単なデータ永続化の概念（ローカルストレージ）に触れる良い機会です。'
+                        ],
+                        appealPoints: [
+                            '<strong>データフローの理解:</strong> データの入力から表示までの基本的なWebアプリのデータフローを構築できることを示せます。',
+                            '<strong>リスト表示の最適化:</strong> 大量のコンテンツを効率的に表示するUI設計能力をアピールできます。',
+                            '<strong>非同期処理の概念:</strong> （将来的に）サーバーとの通信を意識した設計への基礎を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 23,
+                    title: '今日の格言ジェネレーター',
+                    summary: 'データ配列からのランダム選択と動的なコンテンツ表示を学び、ユーザーにポジティブな体験を提供できます。',
+                    tags: ['entertainment', 'logic'],
+                    content: {
+                        description: 'ポジティブな格言や名言のリストをJavaScriptの配列で持ち、ボタンを押すたびにランダムに表示するアプリです。シェア機能（Web Share APIの簡易利用）を追加しても良いでしょう。',
+                        reasons: [
+                            'JavaScriptの配列操作とランダム選択ロジックを学べます。',
+                            'ユーザーのインタラクションに基づいてコンテンツを動的に更新する基礎を実践できます。',
+                            'シンプルな機能でもユーザーに小さな喜びや気づきを与えるUXを追求できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>データ操作・ロジック:</strong> 限られたデータソースから価値を創出するロジック設計能力を示せます。',
+                            '<strong>動的コンテンツ生成:</strong> ユーザーのアクションに応じてページの内容を変化させるスキルをアピールできます。',
+                            '<strong>ポジティブなUX:</strong> ユーザーの感情に訴えかけるようなアプリ設計への関心を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 24,
+                    title: 'ブックマーク管理ツール (簡易版)',
+                    summary: 'URLとタイトルの管理を通じて、フォーム入力処理とリスト表示の応用を学びます。',
+                    tags: ['crud', 'data-structure', 'life-style'],
+                    content: {
+                        description: 'ユーザーがWebサイトのURLとタイトルを登録し、リストで管理できるシンプルなブックマークツールです。登録したブックマークをクリックするとそのURLに飛べるようにします。ローカルストレージに保存します。',
+                        reasons: [
+                            'URLという特定のデータ型の入力・検証・表示を学べます。',
+                            'CRUD操作とリスト表示の連携を実践できます。',
+                            'ユーザーの情報を整理・管理する実用的なアプリを開発できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>データ入力・検証:</strong> ユーザーからの入力を適切に処理し、検証する能力を示せます。',
+                            '<strong>情報整理の支援:</strong> ユーザーのデジタルライフを効率化するツール開発への関心を示せます。',
+                            '<strong>実用的なCRUD応用:</strong> 汎用的なCRUDスキルを具体的なユースケースに応用できることを示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 25,
+                    title: 'パスワード生成ツール',
+                    summary: 'ランダム文字列生成ロジックとセキュリティへの意識をアピールできる実用ツールです。',
+                    tags: ['logic', 'life-style'],
+                    content: {
+                        description: '指定された条件（文字数、大文字、小文字、数字、記号の有無）に基づいて、ランダムな文字列のパスワードを生成するツールです。生成されたパスワードをクリップボードにコピーする機能も追加します。',
+                        reasons: [
+                            'JavaScriptでの文字列操作、ランダム生成ロジックを学べます。',
+                            'ユーザーのセキュリティ意識を高めるツール開発を実践できます。',
+                            '`document.execCommand(\'copy\')`など、ブラウザAPIの具体的な利用例を体験できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>ロジック実装力:</strong> 複雑な条件に基づく文字列生成ロジックを正確に実装できる能力を示せます。',
+                            '<strong>セキュリティ意識:</strong> ユーザーのセキュリティ向上に貢献するツール開発への関心を示せます。',
+                            '<strong>ブラウザAPIの活用:</strong> Web標準APIを利用して機能を拡張するスキルをアピールできます。'
+                        ]
+                    }
+                },
+                {
+                    id: 26,
+                    title: 'イベントカウントダウン',
+                    summary: '日付と時間の計算、リアルタイム更新を学び、ユーザーに期待感を与えるアプリです。',
+                    tags: ['logic', 'ui-ux', 'life-style'],
+                    content: {
+                        description: '特定の日付（誕生日、記念日、試験日など）までの残り時間を、日、時、分、秒でリアルタイムにカウントダウン表示するアプリです。複数のイベントを登録できるようにします。',
+                        reasons: [
+                            'JavaScriptのDateオブジェクトを使った日付・時間の計算ロジックを学べます。',
+                            'setIntervalを使ったリアルタイムなUI更新を実践できます。',
+                            'ユーザーに期待感や目標達成への意識を与えるUI設計を学べます。'
+                        ],
+                        appealPoints: [
+                            '<strong>時間計算・リアルタイム更新:</strong> 正確な時間計算と、それをリアルタイムにUIに反映させるスキルを示せます。',
+                            '<strong>動的なUI設計:</strong> ユーザーにとって魅力的な視覚的カウントダウンを実装できることをアピールできます。',
+                            '<strong>実用性とエンタメ性の両立:</strong> シンプルな機能ながらもユーザーの生活に彩りを加えるアプリ開発への意欲を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 27,
+                    title: 'お気に入り画像ギャラリー (簡易版)',
+                    summary: '画像の表示・管理を通じて、メディアコンテンツの扱いとレイアウト設計を学びます。',
+                    tags: ['crud', 'ui-ux', 'entertainment'],
+                    content: {
+                        description: 'ユーザーが「お気に入り」の画像（URL指定またはプレースホルダー）を登録し、グリッド形式で表示するギャラリーアプリです。画像の追加、削除、全画面表示（モーダルウィンドウ）機能を実装します。',
+                        reasons: [
+                            '画像のURL管理と、動的な画像表示ロジックを学べます。',
+                            'CSS GridやFlexboxを用いたレスポンシブな画像レイアウト設計を実践できます。',
+                            'モーダルウィンドウのようなUIコンポーネントの実装を体験できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>メディアコンテンツ管理:</strong> 画像のようなメディアデータをWebアプリで扱う能力を示せます。',
+                            '<strong>レスポンシブレイアウト:</strong> 異なるデバイスサイズに対応した美しいギャラリーUIを構築できることをアピールできます。',
+                            '<strong>UIコンポーネントの構築:</strong> モーダルやカルーセル（簡易版）など、汎用的なUIパーツの実装スキルを示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 28,
+                    title: '色探しゲーム (子供向け)',
+                    summary: 'Canvasを用いた簡単なゲーム開発で、色認識とUIインタラクションを学びます。',
+                    tags: ['kids', 'game', 'education'],
+                    content: {
+                        description: '画面上にいくつかの色（四角形など）を表示し、指定された色を子供がクリックするゲームです。正解/不正解のフィードバックと、正解時のスコア加算を行います。',
+                        reasons: [
+                            'HTML Canvasでの図形描画と色指定を学べます。',
+                            'クリックイベントと座標判定のロジックを実践できます。',
+                            '色の認識能力を養うような教育的ゲーム設計を学べます。'
+                        ],
+                        appealPoints: [
+                            '<strong>Canvasゲーム開発:</strong> シンプルなゲームロジックとグラフィック描画をWeb技術で実現できる能力を示せます。',
+                            '<strong>教育的アプローチ:</strong> 遊びを通じて学ぶという教育的視点を持ったアプリ開発への関心を示せます。',
+                            '<strong>UIの即時フィードバック:</strong> ユーザーの操作に対して分かりやすいフィードバックを提供するUI設計スキルをアピールできます。'
+                        ]
+                    }
+                },
+                {
+                    id: 29,
+                    title: '簡単ストレッチ/体操ガイド (高齢者向け)',
+                    summary: 'シンプルなステップ表示とタイマーで、健康をサポートするアプリです。',
+                    tags: ['seniors', 'health-wellness', 'ui-ux'],
+                    content: {
+                        description: '高齢者向けの簡単なストレッチや体操の手順を、大きな画像（プレースホルダー）と分かりやすいテキスト、そしてステップごとのタイマーで表示するアプリです。',
+                        reasons: [
+                            'ステップバイステップのコンテンツ表示ロジックを学べます。',
+                            '時間管理（タイマー）とUI連携を実践できます。',
+                            '高齢者の身体的特性を考慮した分かりやすいUI/UX設計に挑戦できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>順序立てた情報提示:</strong> 複雑な情報を段階的に分かりやすく提示するUI設計能力を示せます。',
+                            '<strong>健康支援アプリ:</strong> ユーザーの健康維持に貢献するアプリ開発への意欲と実践能力をアピールできます。',
+                            '<strong>シンプルかつ効果的なデザイン:</strong> 最小限の要素で最大の効果を生み出すデザイン思考を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 30,
+                    title: 'シンプルオンラインホワイトボード',
+                    summary: 'リアルタイム描画の概念とCanvas操作を学び、コラボレーションツールの基礎を体験できます。',
+                    tags: ['ui-ux', 'game', 'entertainment'],
+                    content: {
+                        description: 'HTML Canvas上に、マウスやタッチで自由に線を描けるシンプルなホワイトボードです。描画した線を消したり、色を変えたりする機能も実装します。リアルタイムでの共有機能は含めず、単一ユーザーで完結する範囲で実装します。',
+                        reasons: [
+                            'HTML Canvasでの高度な描画操作（線の描画、色の変更、消去）を学べます。',
+                            'マウスイベント（mousemove, mousedown, mouseup）を使ったインタラクティブな描画を実践できます。',
+                            '将来的なリアルタイムコラボレーション機能の基礎となる技術を体験できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>高度なCanvas操作:</strong> Canvas要素を使った複雑なグラフィックインタラクションを実装できる能力を示せます。',
+                            '<strong>クリエイティブツール開発:</strong> ユーザーの創造性を刺激するようなツール開発への関心を示せます。',
+                            '<strong>UIの自由度:</strong> ユーザーが自由に表現できるインタフェース設計へのこだわりを示せます。'
                         ]
                     }
                 }
