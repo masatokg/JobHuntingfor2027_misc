@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT就活ポートフォリオ・アイデアファインダー</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Calm Harmony (Light neutrals with muted teal/blue accents) -->
+    <!-- Application Structure Plan: The application is designed as an "Idea Finder" dashboard. It transforms the static list from the report into an interactive experience. The main view presents ten app ideas as cards in a responsive grid. Users can filter these ideas by the primary skill they wish to showcase (e.g., UI/UX, Data Structures, Game Development), which highlights relevant cards. Clicking any card expands it accordion-style to reveal detailed information without leaving the page. This structure was chosen to facilitate easy comparison and guide the user's decision-making process, making the content more engaging and useful than a simple text document. -->
+    <!-- Visualization & Content Choices: Report Info: 10 app ideas with descriptions and appeal points. -> Goal: Inform, Compare, Guide. -> Viz/Presentation Method: Interactive cards in a responsive grid. Details are shown/hidden with an accordion mechanism. Key skills are presented as tags. -> Interaction: Users filter cards by clicking skill-based buttons, which visually emphasizes matching ideas. Users click cards to expand/collapse details. -> Justification: This approach turns a passive list into a dynamic tool. Filtering helps users match ideas to their personal learning goals. The accordion keeps the UI clean and focused. -> Library/Method: HTML/Tailwind CSS for structure and style. Vanilla JS for all interactions (filtering, accordion). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+        .filter-btn.active {
+            background-color: #0d9488;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+        }
+        .card.open .card-content {
+            max-height: 1000px;
+            transition: max-height 1s ease-in-out;
+        }
+        .card-container {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .card-container.dimmed {
+            opacity: 0.3;
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-teal-700 mb-2">IT就活ポートフォリオ・アイデアファインダー</h1>
+            <p class="text-slate-600 max-w-2xl mx-auto">
+                就職活動であなたのスキルを効果的にアピールするためのWebアプリ開発アイデア集です。下のフィルターで興味のある分野を絞り込んだり、各カードをクリックして詳細を確認しましょう。
+            </p>
+        </header>
+
+        <section id="filter-section" class="mb-10">
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+                <button data-filter="all" class="filter-btn active text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">すべて</button>
+                <button data-filter="crud" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">総合力 (CRUD)</button>
+                <button data-filter="ui-ux" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">UI/UX</button>
+                <button data-filter="data-structure" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">データ構造</button>
+                <button data-filter="auth" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">認証</button>
+                <button data-filter="api" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">外部API</button>
+                <button data-filter="game" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">ゲーム開発</button>
+                <button data-filter="entertainment" class="filter-btn text-sm md:text-base px-4 py-2 bg-white rounded-full shadow-sm hover:bg-teal-100 transition-colors">エンタメ</button>
+            </div>
+        </section>
+
+        <main id="app-ideas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <!-- App Idea Cards will be injected here by JavaScript -->
+        </main>
+
+        <footer class="text-center mt-12 text-slate-500 text-sm">
+            <p>&copy; 2025 ポートフォリオアイデア. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const appIdeas = [
+                {
+                    id: 1,
+                    title: 'タスク管理アプリ',
+                    summary: 'Web開発の基本であるCRUD操作を総合的に学べ、ユーザー体験を意識した機能追加でアピール度を高められます。',
+                    tags: ['crud', 'ui-ux'],
+                    content: {
+                        description: 'ユーザーが自身のタスクを追加、編集、削除、完了できる基本的なタスク管理ツールです。タスクには期限や優先度を設定できるようにすると良いでしょう。',
+                        reasons: [
+                            '基本的なCRUD (Create, Read, Update, Delete) 操作を学ぶのに最適です。',
+                            'ユーザーインターフェースが比較的シンプルで、複雑なデザインは不要です。',
+                            'データベースとの連携を体験できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>基本的なWeb開発スキル:</strong> フロントエンド（HTML, CSS, JavaScript）とバックエンド（データベース連携、API設計）の基礎を総合的に示せます。',
+                            '<strong>ユーザー体験への配慮:</strong> タスクの並び替えやフィルタリング機能を追加することで、ユーザー視点での開発能力をアピールできます。'
+                        ]
+                    }
+                },
+                {
+                    id: 2,
+                    title: 'シンプルなブログ/メモ投稿アプリ',
+                    summary: 'コンテンツ管理の基本と、ログイン機能による認証・認可の仕組みを学ぶのに最適なプロジェクトです。',
+                    tags: ['crud', 'auth'],
+                    content: {
+                        description: 'ユーザーが記事やメモを投稿し、閲覧できるアプリです。記事にはタイトルと本文があり、投稿日時の表示や、編集・削除機能があると良いでしょう。',
+                        reasons: [
+                            'テキストベースのコンテンツ管理の基本が学べます。',
+                            'ログイン機能を追加することで、認証・認可の基礎を学ぶ良い機会になります。'
+                        ],
+                        appealPoints: [
+                            '<strong>コンテンツ管理の理解:</strong> テキストデータの保存、取得、表示といったWebサービスの根幹部分を理解していることを示せます。',
+                            '<strong>セキュアな設計への意識:</strong> ユーザー認証を実装することで、セキュリティに対する意識をアピールできます。'
+                        ]
+                    }
+                },
+                {
+                    id: 3,
+                    title: 'レシピ共有/管理アプリ',
+                    summary: '複数のデータ型を組み合わせた複雑なデータ構造の設計や、検索機能の実装スキルをアピールできます。',
+                    tags: ['crud', 'data-structure'],
+                    content: {
+                        description: 'ユーザーが自分のレシピを投稿し、他のユーザーがそれを検索・閲覧できるアプリです。レシピには材料、手順、写真（プレースホルダーでも可）などを登録できるようにします。',
+                        reasons: [
+                            'テキスト情報だけでなく、リスト形式（材料、手順）や画像（URL）といった複数のデータ型の扱いを学べます。',
+                            '検索機能の実装は、データのフィルタリングや表示ロジックの良い練習になります。'
+                        ],
+                        appealPoints: [
+                            '<strong>データ構造の設計能力:</strong> 複雑なデータをどのようにデータベースに保存し、取得するかを考える良い機会です。',
+                            '<strong>検索・フィルタリング機能:</strong> 大量の情報の中から必要な情報を見つけるためのロジックを実装できることを示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 4,
+                    title: '読書記録アプリ',
+                    summary: 'パーソナルなデータ管理を実装する良い練習になります。外部APIと連携すれば、さらに実践的なスキルを示せます。',
+                    tags: ['crud', 'ui-ux', 'api'],
+                    content: {
+                        description: 'ユーザーが読んだ本や読みたい本の情報を記録し、管理できるアプリです。本のタイトル、著者、感想、読了日などを登録し、リストで表示します。本のカバー画像を表示できるとさらに良いでしょう。',
+                        reasons: [
+                            'ユーザー独自のデータをパーソナルに管理するコンセプトがシンプルです。',
+                            '外部API（例: Google Books APIなど）との連携を試す良い機会になりますが、必須ではありません。'
+                        ],
+                        appealPoints: [
+                            '<strong>パーソナルデータ管理の理解:</strong> ユーザーごとにデータを分離し、管理する基本的な方法を示せます。',
+                            '<strong>UI/UXの工夫:</strong> 読書状況や進捗が分かりやすいような表示方法を工夫することで、UI/UXへの関心をアピールできます。',
+                            '<strong>外部API連携:</strong> APIを利用して外部サービスから情報を取得・表示する能力を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 5,
+                    title: 'カレンダー連動型イベントメモアプリ',
+                    summary: '日付や時間に関連するデータの扱いや、ユーザー操作に反応するインタラクティブなUIの実装経験を積めます。',
+                    tags: ['crud', 'ui-ux'],
+                    content: {
+                        description: 'シンプルなカレンダー表示があり、特定の日付にイベントや予定のメモを登録できるアプリです。登録したメモはその日付の下に表示されます。',
+                        reasons: [
+                            '日付に関連するデータの扱い方や、カレンダー表示の基本的なロジックを学べます。',
+                            '状態管理（選択された日付の管理など）の良い練習になります。'
+                        ],
+                        appealPoints: [
+                            '<strong>日付・時間データの扱い:</strong> 日付や時間に関連するデータの処理能力をアピールできます。',
+                            '<strong>インタラクティブなUI:</strong> カレンダーをクリックして日付を選択するなど、ユーザーの操作に反応するインタラクティブなUIを実装できることを示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 6,
+                    title: 'シンプルゲーム（パズル/ブロック崩し）',
+                    summary: 'ゲーム開発の基本、キャンバス操作、JavaScriptでの物理演算（簡易版）を学び、ユーザーを楽しませる能力を示せます。',
+                    tags: ['game', 'ui-ux'],
+                    content: {
+                        description: 'ミニゲーム（例: 数独、ブロック崩し、シンプルなシューティングゲームなど）を実装します。Canvas要素を使ってグラフィックを描画し、キーボードやマウスで操作できるようにします。',
+                        reasons: [
+                            'JavaScriptとHTML Canvasを使った描画・アニメーションの基礎を学べます。',
+                            'イベント処理やゲームロジックの設計が良い練習になります。',
+                            'ユーザーを楽しませるためのUX設計に挑戦できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>ゲーム開発スキル:</strong> Web技術を用いたゲーム開発の基礎能力を示せます。',
+                            '<strong>描画・アニメーション:</strong> Canvas要素を活用した動的なUI作成能力をアピールできます。',
+                            '<strong>問題解決能力:</strong> ゲーム特有のロジックや物理演算の課題解決経験を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 7,
+                    title: 'ランダムレシピ/献立ジェネレーター',
+                    summary: 'データのフィルタリングとランダム表示、ユーザーの好みに合わせたパーソナライズ機能を実装できます。',
+                    tags: ['data-structure', 'ui-ux', 'entertainment'],
+                    content: {
+                        description: 'いくつかの料理ジャンル（和食、洋食など）や食材を登録し、ユーザーが選んだ条件に基づいてランダムにレシピを提案するアプリです。お気に入り登録機能も検討できます。',
+                        reasons: [
+                            'データ（レシピ）のコレクションを扱い、フィルタリングやランダム選出ロジックを実装できます。',
+                            'ユーザーの入力に基づいて動的にコンテンツを生成する練習になります。'
+                        ],
+                        appealPoints: [
+                            '<strong>データ処理能力:</strong> 複雑なデータセットからの情報抽出や、条件に基づく選択ロジックをアピールできます。',
+                            '<strong>UX改善:</strong> ユーザーの意思決定を助けるツールとして、UXを考慮した設計能力を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 8,
+                    title: 'インタラクティブクイズアプリ',
+                    summary: 'ユーザーとのインタラクション、状態管理、結果表示のロジックを学ぶのに最適で、幅広いジャンルで応用できます。',
+                    tags: ['ui-ux', 'data-structure', 'entertainment'],
+                    content: {
+                        description: '複数の選択肢から正解を選ぶ形式のクイズアプリです。正解・不正解の表示、点数計算、最後に結果サマリーを表示します。クイズのジャンルは自由に設定できます。',
+                        reasons: [
+                            'ユーザーの入力を受け付け、それに基づいて動的にUIを更新するロジックを実装できます。',
+                            'アプリケーションの状態管理（現在の問題、スコアなど）の良い練習になります。',
+                            'データの構造化（問題、選択肢、正解など）の基礎を学べます。'
+                        ],
+                        appealPoints: [
+                            '<strong>インタラクティブ性:</strong> ユーザーとの活発なやり取りを伴うWebアプリの実装能力を示せます。',
+                            '<strong>状態管理:</strong> アプリケーションの状態を適切に管理し、それに基づいてUIを更新するスキルをアピールできます。',
+                            '<strong>ロジック設計:</strong> クイズの正誤判定やスコアリングといった明確なロジックを実装できることを示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 9,
+                    title: '視覚的な単位変換ツール',
+                    summary: '直感的なUIと数値処理を組み合わせ、実用性とデザイン性を両立させたアプリです。',
+                    tags: ['ui-ux', 'logic'],
+                    content: {
+                        description: '距離（km→mile）、重さ（kg→lb）、温度（℃→℉）などの単位を変換するツールです。スライダーやグラフを用いて視覚的に変換結果を示すなど、通常の計算機とは異なる工夫を凝らします。',
+                        reasons: [
+                            '数値の入力と出力、計算ロジックの実装を学べます。',
+                            'ユーザーが直感的に操作できるUI/UXを設計する良い機会です。',
+                            'シンプルな機能でも、視覚的な要素を追加することで差別化できます。'
+                        ],
+                        appealPoints: [
+                            '<strong>数値処理・ロジック:</strong> 計算や変換といった明確なロジックをWebアプリに組み込む能力を示せます。',
+                            '<strong>視覚化スキル:</strong> 単なる数値表示だけでなく、情報を視覚的に分かりやすく表現する工夫をアピールできます。',
+                            '<strong>UI/UXへのこだわり:</strong> 実用性とデザイン性を両立させたアプリ開発への意識を示せます。'
+                        ]
+                    }
+                },
+                {
+                    id: 10,
+                    title: 'シンプルなチャットアプリ（シングルユーザー）',
+                    summary: 'リアルタイム性のあるUIの基本と、メッセージの送受信、表示ロジックを学ぶ良い機会です。',
+                    tags: ['ui-ux', 'crud', 'data-structure'],
+                    content: {
+                        description: '自分（ユーザー）と仮想の相手（AIボットや固定メッセージ）とのシンプルなチャットを行うアプリです。メッセージの入力、送信、表示機能を実装します。リアルタイム性を意識したUIに挑戦できます。',
+                        reasons: [
+                            'メッセージの入力、表示、スクロールといったチャットUIの基本を学べます。',
+                            'メッセージデータ（送信者、内容、タイムスタンプ）の扱い方を実践できます。',
+                            'WebSocketなどのリアルタイム技術の概念に触れる良い機会になります（必須ではない）。'
+                        ],
+                        appealPoints: [
+                            '<strong>リアルタイムUIの基礎:</strong> 非同期通信や動的なコンテンツ更新に関する理解を示せます。',
+                            '<strong>テキスト処理:</strong> ユーザー入力の取得・表示、簡単な整形処理の能力をアピールできます。',
+                            '<strong>UI/UXの工夫:</strong> チャットの会話の流れが分かりやすいような表示や操作性を工夫できます。'
+                        ]
+                    }
+                }
+            ];
+
+            const grid = document.getElementById('app-ideas-grid');
+
+            function renderCards() {
+                grid.innerHTML = '';
+                appIdeas.forEach(idea => {
+                    const cardContainer = document.createElement('div');
+                    cardContainer.className = 'card-container';
+                    cardContainer.dataset.tags = idea.tags.join(',');
+                    
+                    cardContainer.innerHTML = `
+                        <div class="card bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col cursor-pointer hover:shadow-xl transition-shadow duration-300">
+                            <div class="card-header p-6">
+                                <div class="flex justify-between items-start">
+                                    <h2 class="text-xl font-bold text-teal-800">${idea.title}</h2>
+                                    <div class="plus-icon text-teal-500 text-2xl font-light transform transition-transform duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                                    </div>
+                                </div>
+                                <p class="text-slate-600 mt-2">${idea.summary}</p>
+                            </div>
+                            <div class="card-content">
+                                <div class="px-6 pb-6 pt-2">
+                                    <div class="mb-4">
+                                        <h3 class="font-bold mb-2 border-b border-teal-200 pb-1 text-teal-700">内容</h3>
+                                        <p class="text-slate-600">${idea.content.description}</p>
+                                    </div>
+                                    <div class="mb-4">
+                                        <h3 class="font-bold mb-2 border-b border-teal-200 pb-1 text-teal-700">初心者に勧められる理由</h3>
+                                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                            ${idea.content.reasons.map(reason => `<li>${reason}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold mb-2 border-b border-teal-200 pb-1 text-teal-700">アピールポイント</h3>
+                                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                            ${idea.content.appealPoints.map(point => `<li>${point}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(cardContainer);
+                });
+            }
+
+            function setupEventListeners() {
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const cards = document.querySelectorAll('.card-container');
+
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const filter = button.dataset.filter;
+                        
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+
+                        cards.forEach(card => {
+                            const tags = card.dataset.tags.split(',');
+                            if (filter === 'all' || tags.includes(filter)) {
+                                card.classList.remove('dimmed');
+                            } else {
+                                card.classList.add('dimmed');
+                            }
+                        });
+                    });
+                });
+                
+                grid.addEventListener('click', (e) => {
+                    const cardElement = e.target.closest('.card');
+                    if (cardElement) {
+                        cardElement.classList.toggle('open');
+                        const icon = cardElement.querySelector('.plus-icon svg');
+                        icon.parentElement.classList.toggle('rotate-45');
+                    }
+                });
+            }
+
+            renderCards();
+            setupEventListeners();
+        });
+    </script>
+</body>
+</html>
